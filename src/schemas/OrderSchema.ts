@@ -27,3 +27,11 @@ export const listOrderSchema = z.object({
     limit: z.coerce.number().min(1).default(10),
     state: OrderStateEnum.optional()
 });
+
+
+export const updateOrderSchema = createOrderSchema.omit({
+    services: true
+     // Não deixa alterar serviços no update simples para não quebrar valor total
+}).partial();
+
+export type UpdateOrderDTO = z.infer<typeof updateOrderSchema>;

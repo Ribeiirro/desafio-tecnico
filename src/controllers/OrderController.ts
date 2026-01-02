@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { OrderService } from '../services/OrderService';
-import { createOrderSchema, listOrderSchema } from '../schemas/OrderSchema';
+import { createOrderSchema, listOrderSchema, updateOrderSchema } from '../schemas/OrderSchema';
 import { ZodError } from 'zod';
 
 const orderService = new OrderService();
@@ -9,10 +9,8 @@ export class OrderController {
 
     async create(req: Request, res: Response) {
         try {
-            // 1. Validação Zod
             const validatedData = createOrderSchema.parse(req.body);
 
-            // 2. Service
             const order = await orderService.create(validatedData);
             return res.status(201).json(order);
 
@@ -34,6 +32,19 @@ export class OrderController {
         }
     }
 
+    async update(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const validatedData = updateOrderSchema.parse(req.body);
+
+            const order = await orderService.update(id, validatedData);
+            return res.json(order);
+
+        } catch (error: unknown) {
+            return OrderController.handleError(res, error);
+        }
+    }
+
     async advance(req: Request, res: Response) {
         try {
             const { id } = req.params;
@@ -45,18 +56,14 @@ export class OrderController {
         }
     }
 
-    // Método helper privado e estático para padronizar erros
     private static handleError(res: Response, error: unknown) {
         if (error instanceof ZodError) {
-        
             return res.status(400).json({ errors: error.issues });
         }
-
         if (error instanceof Error) {
             const status = error.message === "Pedido não encontrado." ? 404 : 400;
             return res.status(status).json({ error: error.message });
         }
-
         return res.status(500).json({ error: "Erro interno do servidor" });
     }
 }

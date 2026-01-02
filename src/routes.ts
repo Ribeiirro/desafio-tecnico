@@ -20,6 +20,11 @@ router.use('/orders', authMiddleware);
 
 router.post('/orders', orderController.create);
 router.get('/orders', orderController.list);
+
+// Rota de Edição Cadastral (PUT)
+router.put('/orders/:id', orderController.update);
+
+// Rota de Transição de Estado (PATCH)
 router.patch('/orders/:id/advance', orderController.advance);
 
 export default router;
