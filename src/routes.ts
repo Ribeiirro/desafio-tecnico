@@ -7,7 +7,7 @@ const router = Router();
 const orderController = new OrderController();
 const authController = new AuthController();
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (req: Request, res: Response) => { 
     res.json({ message: 'API Backend rodando!' });
 });
 

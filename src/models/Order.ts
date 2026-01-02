@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export enum OrderState {
     CREATED = 'CREATED',
@@ -11,12 +11,14 @@ export enum OrderStatus {
     DELETED = 'DELETED',
 }
 
-interface IService {
+// Interface do Subdocumento
+export interface IService {
     name: string;
     value: number;
     status: 'PENDING' | 'DONE';
 }
 
+// Interface do Documento
 export interface IOrder extends Document {
     lab: string;
     patient: string;
@@ -24,7 +26,8 @@ export interface IOrder extends Document {
     state: OrderState;
     status: OrderStatus;
     services: IService[];
-    totalValue(): number; 
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const OrderSchema: Schema = new Schema({
@@ -48,6 +51,7 @@ const OrderSchema: Schema = new Schema({
             status: { type: String, enum: ['PENDING', 'DONE'], default: 'PENDING' }
         }],
         required: true,
+        // Validação nativa do Mongoose como fallback
         validate: [(val: IService[]) => val.length > 0, 'O pedido deve ter pelo menos um serviço.']
     }
 }, { timestamps: true });
