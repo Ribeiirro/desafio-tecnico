@@ -1,0 +1,246 @@
+type: collection.insomnia.rest/5.0
+name: order-management-challenge
+meta:
+  id: wrk_6d71b7e90a1a4468b891fc8c6ccd98b7
+  created: 1766874645802
+  modified: 1766874652993
+  description: ""
+collection:
+  - url: "{{ base_url }}/register"
+    name: register
+    meta:
+      id: req_1ea8805dd8cc4e33975ec639c573644d
+      created: 1766874645889
+      modified: 1767354825129
+      isPrivate: false
+      description: ""
+      sortKey: -1766874645889
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin1@lab.com",
+        	"password": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}/login"
+    name: login
+    meta:
+      id: req_db9de965da804e3594cf41691b74a75a
+      created: 1766874840413
+      modified: 1767352717823
+      isPrivate: false
+      description: ""
+      sortKey: -1766874840413
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@lab.com",
+        	"password": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}/orders"
+    name: orders
+    meta:
+      id: req_3eb5fca6e977468b886a2823dbf4b798
+      created: 1766874904795
+      modified: 1767360560864
+      isPrivate: false
+      description: ""
+      sortKey: -1766874904795
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"lab": "Laboratório Prevenção",
+        	"patient": "Pedro Sampaio",
+        	"customer": "Clínica Geral Saúde",
+        	"services": [
+        		{
+        			"name": "Urina Tipo I",
+        			"value": 18.50
+        		},
+        		{
+        			"name": "Urocultura",
+        			"value": 45.00
+        		},
+        		{
+        			"name": "Parasitológico de Fezes",
+        			"value": 20.00
+        		}
+        	]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}"
+    name: Index
+    meta:
+      id: req_597d6b60611740c1bcc75ce6fd16e8c1
+      created: 1766874990936
+      modified: 1767352847935
+      isPrivate: false
+      description: ""
+      sortKey: -1766874990936
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/orders/6957c277ca9bfd8305c1d0e5"
+    name: Put
+    meta:
+      id: req_1447954e91314dbea997a88af49572b6
+      created: 1767359979531
+      modified: 1767361167943
+      isPrivate: false
+      description: ""
+      sortKey: -1767359979531
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "patient": "Nome Corrigido da Silva",
+          "lab": "Laboratório Novo"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}/orders"
+    name: orders
+    meta:
+      id: req_b06e0b4e211647d7aeb0145e2a42fc7f
+      created: 1767360612654
+      modified: 1767360625281
+      isPrivate: false
+      description: ""
+      sortKey: -1766874872604
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/orders/6957c8329e44556387ce7b73/advance"
+    name: PATCH
+    meta:
+      id: req_6326f47caa024277bd38a953fd59057c
+      created: 1767360658436
+      modified: 1767360765122
+      isPrivate: false
+      description: ""
+      sortKey: -1767360658436
+    method: PATCH
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c810b480a17aae15b6d57ac2854564dc6a0dda62
+    created: 1766874645809
+    modified: 1766874645809
+environments:
+  name: Base Environment
+  meta:
+    id: env_c810b480a17aae15b6d57ac2854564dc6a0dda62
+    created: 1766874645806
+    modified: 1767352707392
+    isPrivate: false
+  data:
+    base_url: http://localhost:3000
+    token: "{% response 'body', 'req_db9de965da804e3594cf41691b74a75a',
+      'b64::JC50b2tlbg==::46b', 'always', 60 %}"
